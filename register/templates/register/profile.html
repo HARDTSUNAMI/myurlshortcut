@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %}
+<nav>
+    <p><button class="btn" onclick="location.href='/auth/' ">Login</button></p>
+</nav>
+<div>
+    <p class="nwlinktext" style="font-size: 40px">Paste the URL to be shortened</p>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div align="center" >
+    <form method="post">
+            {% csrf_token %}
+            {{ form.link }}
+        <button class="btn" style="width: 5em" type="submit">Cut</button>
+    </form>
+    <p align="center">{{ form.link.errors }}</p>
+    </div>
+
+
+
+
+{% endblock %}
