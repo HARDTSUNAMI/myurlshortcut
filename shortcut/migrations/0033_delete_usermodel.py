@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('register', '0032_auto_20210408_1113'),
+        ('shortcut', '0032_auto_20210408_1113'),
     ]
 
     operations = [

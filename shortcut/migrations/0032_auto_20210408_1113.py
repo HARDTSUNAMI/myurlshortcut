@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('register', '0031_auto_20210405_1549'),
+        ('shortcut', '0031_auto_20210405_1549'),
     ]
 
     operations = [
