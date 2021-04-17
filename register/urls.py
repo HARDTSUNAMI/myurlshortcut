@@ -11,7 +11,7 @@ urlpatterns = [
     path('main/', views.mainpage_view, name='main'),
     path('userprofile/', views.userprofile_view, name='userprofile'),
     path('newlink/', views.newgetlink_view, name='nLink'),
-    path('<str:link_slug>', views.home_view, name='golink'),
+    path('redirect/<str:link_slug>', views.home_view, name='golink'),
     path('delete/<slug>', views.DelView.as_view(), name='delete')
 
 ]

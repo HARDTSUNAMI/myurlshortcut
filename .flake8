@@ -1,4 +1,0 @@
-
-[flake8]
-exclude=.hg,.git,.cache,build., ./docs/source/conf.py, .js, */migrations/*.py,docs/source/conf.py,old,build,dist
-max-line-length=120
