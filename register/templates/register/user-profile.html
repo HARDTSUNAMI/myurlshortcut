@@ -33,6 +33,7 @@ li {
   float: left;
   padding: 8px 16px;
   text-decoration: none;">
+    {% if el in links > 1 %}
      {% for el in links.paginator.page_range %}
                 <div class="pagination"  style="
                 position: fixed;
@@ -45,5 +46,6 @@ li {
                     <button class="btn" style="width: 5%" ><a href="?page={{ el }}">{{ el }}</a></button>
                 </div>
      {% endfor%}
+    {% endif %}
     </nav>
 {% endblock %}

@@ -21,7 +21,7 @@ class LinkForm(forms.ModelForm):
 
         }
 
-    def clean_link(self):
+    def clean_link(self) -> str:
         link = self.cleaned_data.get('link')
         matches = ['http:', 'https:', 'ftp:', 'ftps:']
         print(link)

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator
 from django.db.models import F
+from django.http import HttpRequest
 from django.shortcuts import HttpResponse, redirect, render
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_protect
@@ -14,7 +15,7 @@ from .models import LinkModel
 """РЕГИСТРАЦИЯ"""
 
 
-def register_view(request):
+def register_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -32,7 +33,7 @@ def register_view(request):
 """АВТОРИЗАЦИЯ"""
 
 
-def auth_view(request):
+def auth_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = LoginForm({'username': request.POST['username'],
                           'password': request.POST['password']
@@ -59,7 +60,7 @@ def auth_view(request):
 
 
 @csrf_protect
-def profile_view(request):
+def profile_view(request: HttpRequest) -> HttpResponse:
     form = LinkForm()
     data = {
         'form': form,
@@ -81,7 +82,7 @@ def profile_view(request):
 
 
 @login_required(login_url='auth/')
-def mainpage_view(request):
+def mainpage_view(request: HttpRequest) -> HttpResponse:
     form = LinkForm()
     data = {
         'form': form,
@@ -102,7 +103,7 @@ def mainpage_view(request):
 
 
 @login_required()
-def userprofile_view(request):
+def userprofile_view(request: HttpRequest) -> HttpResponse:
     slug = LinkModel.objects.filter(author=request.user)
     paginator = Paginator(slug, 4)
     page = request.GET.get('page')
@@ -113,7 +114,7 @@ def userprofile_view(request):
 """ВЫВОДИТ ГОТОВУЮ ССЫЛКУ НА ЭКРАН И В БД"""
 
 
-def newgetlink_view(request):
+def newgetlink_view(request: HttpRequest) -> HttpResponse:
     lastslug = LinkModel.objects.last()
     return render(request, 'register/nwlnk.html', {'lastslug': lastslug})
 
@@ -122,7 +123,7 @@ def newgetlink_view(request):
 
 
 @login_required(login_url='auth/')
-def home_view(request, link_slug):
+def home_view(request: HttpRequest, link_slug: str) -> HttpResponse:
     home = LinkModel.objects.filter(slug=link_slug)[0]
     if request.method == 'GET':
         LinkModel.objects.filter(slug=link_slug).update(counter=F('counter') + 1)
