@@ -67,7 +67,7 @@ def profile_view(request: HttpRequest) -> HttpResponse:
     }
 
     if request.method == 'POST':
-        form = LinkForm(request.POST)
+        form = LinkForm(request.POST.dict())
         if form.is_valid():
             form.save()
             return redirect('newlink/')
@@ -88,7 +88,8 @@ def mainpage_view(request: HttpRequest) -> HttpResponse:
         'form': form,
     }
     if request.method == 'POST':
-        form = LinkForm(request.POST)
+        if request.user.is_authenticated:
+            form = LinkForm(request.POST.dict())
         if form.is_valid():
             instance = form.save(commit=True)
             instance.author = request.user

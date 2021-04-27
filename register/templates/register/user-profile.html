@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
+            <button class="btn" style="background-color: red" onclick="location.href='/main' ">Exit</button>
 {% endblock %}
 {% block content %}
 
@@ -21,21 +22,19 @@ li {
         <div align="center">
         <h4 style="margin-top: 50px">{{ el.created_at }}</h4>
             <ul style="color: white; font-size: 14px;margin-top: 2px;list-style: square outside">
-                <li><b>Short url :{{ el.slug }}</b></li>
+                <li><b>Short url :http://127.0.0.1:8000/redirect/{{ el.slug }}</b></li>
                 <li><b>{{ el.counter }} times</b></li>
                 <li ><b>Full link :</b><a><i>{{ el.link }}</i></a></li>
                 <a href="{% url 'delete' el.slug %}" class="btn" type="submit">Delete</a>
             </ul>
         </div>
     {% endfor %}
-
     <nav style=  "color: black;
   float: left;
   padding: 8px 16px;
   text-decoration: none;">
-    {% if el in links > 1 %}
      {% for el in links.paginator.page_range %}
-                <div class="pagination"  style="
+          <div class="pagination"  style="
                 position: fixed;
                 left: 0; bottom: 0;
                 padding: 5px;
@@ -46,6 +45,5 @@ li {
                     <button class="btn" style="width: 5%" ><a href="?page={{ el }}">{{ el }}</a></button>
                 </div>
      {% endfor%}
-    {% endif %}
     </nav>
 {% endblock %}
