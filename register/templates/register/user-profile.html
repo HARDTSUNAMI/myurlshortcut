@@ -34,6 +34,7 @@ li {
   padding: 8px 16px;
   text-decoration: none;">
      {% for el in links.paginator.page_range %}
+         {% if links.has_next %}
           <div class="pagination"  style="
                 position: fixed;
                 left: 0; bottom: 0;
@@ -42,8 +43,21 @@ li {
                 color: #fff;
                 width: 100%;
                 text-align-all: center">
-                    <button class="btn" style="width: 5%" ><a href="?page={{ el }}">{{ el }}</a></button>
+                    <button class="btn" style="width: 5%" ><a href="?page={{ el }}">>></a></button>
                 </div>
-     {% endfor%}
+            {% endif%}
+                  {% if links.has_previous %}
+          <div class="pagination"  style="
+                position: fixed;
+                left: 0; bottom: 0;
+                padding: 5px;
+                background: rgba(0,0,0,0.18);
+                color: #fff;
+                width: 100%;
+                text-align-all: center">
+                    <button class="btn" style="width: 5%" ><a href="?page={{ el.previous_page_number}}"><<</a></button>
+                </div>
+            {% endif%}
+    {% endfor %}
     </nav>
 {% endblock %}

@@ -106,7 +106,7 @@ def mainpage_view(request: HttpRequest) -> HttpResponse:
 @login_required()
 def userprofile_view(request: HttpRequest) -> HttpResponse:
     slug = LinkModel.objects.filter(author=request.user)
-    paginator = Paginator(slug, 4)
+    paginator = Paginator(slug, 3)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
     return render(request, 'register/user-profile.html', {'links': page_obj})
