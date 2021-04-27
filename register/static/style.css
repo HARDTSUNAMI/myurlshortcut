@@ -1,0 +1,53 @@
+.btn{
+    font-style: italic;
+    width: 10%;
+    background-color: #690a86;
+    color: whitesmoke ;
+    display: inline;
+    text-align: center;
+    border: 5px;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+    padding: 1em 1.5em;
+}
+
+
+.bg {
+    background-size: cover;
+    background: url("ICS-ABSTRACT-BUBBLE-1920x1080.jpg");
+}
+
+.nwlinktext {
+    text-align: center;
+    margin-top: 15%;
+    color: #3ec9dc;
+    font-family: "ProximaNova ExtraBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic;
+    font-size: 25px;
+}
+
+.field-validation-error {
+    color: #C1372A !important;
+    display: block;
+    font-weight: normal !important;
+    margin-top: -19px;
+    margin-bottom: 10px;
+}
+
+.formstyle{
+
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+    background: #3ad3e2;
+    border: 3px aliceblue;
+    font: normal 16px Google Sans,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    -webkit-font-variant-ligatures: none;
+    font-variant-ligatures: none;
+    height: 46px;
+    outline: none;
+    width: 50%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 8px 8px 8px 8px;
+    text-align: center;
+    color: black;
+}

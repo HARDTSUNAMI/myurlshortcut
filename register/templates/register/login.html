@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <button class="btn" onclick="location.href='/registration/'" > Register </button>
+{% endblock %}
+
+{% block content %}
+    <div align="center" class="container">
+        <form style="margin-top: 25%" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn" type="submit">Enter</button>
+        </form>
+    </div>
+
+
+{% endblock %}
+

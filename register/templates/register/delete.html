@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+        <form style="    text-align: center;
+    margin-top: 15%;" method="post">
+            {% csrf_token %}
+            <button style="width: 20%;" class="btn" type="submit">Confirm Delete</button>
+        </form>
+
+</div>
+
+{% endblock %}

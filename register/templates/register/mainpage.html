@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<nav>
+        <button class="btn" style="background-color: red" onclick="location.href='/' ">Exit</button>
+        <button class="btn" style="background-color:#9123ff" onclick ="location.href= '/userprofile/'">Search history</button>
+</nav>
+
+{% endblock %}
+{% block content %}
+
+    <p class="nwlinktext" style="font-size: 40px">
+        Paste the URL to be shortened
+    </p>
+    <div align="center" >
+        <form method="post">
+            <p>{{ form.link.errors }}</p>
+            {% csrf_token %}
+            {{form.link}}
+        <button class="btn" style="width: 5em" type="submit">
+            Cut
+        </button>
+        </form>
+
+    </div>
+
+{% endblock %}
+
