@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+            <button class="btn" style="background-color: red" onclick="location.href='/main' ">Exit</button>
+{% endblock %}
+{% block content %}
+
+    <style>
+li {
+    list-style-type: none;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+    </style>
+            <div
+            align="center" id="project_list">
+                            {% include 'register/ajax_pag.html' %}
+            </div>
+{% endblock %}

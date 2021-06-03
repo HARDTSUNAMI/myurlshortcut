@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.core.paginator import Paginator
 from django.db.models import F
 from django.http import HttpRequest
 from django.shortcuts import HttpResponse, redirect, render
@@ -10,7 +9,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DeleteView
 from .forms import LoginForm, LinkForm
 from .models import LinkModel
-
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 """РЕГИСТРАЦИЯ"""
 
@@ -104,12 +103,21 @@ def mainpage_view(request: HttpRequest) -> HttpResponse:
 
 
 @login_required()
-def userprofile_view(request: HttpRequest) -> HttpResponse:
+def pagination_view(request: HttpRequest):
     slug = LinkModel.objects.filter(author=request.user)
+    page = request.GET.get('page', 1)
     paginator = Paginator(slug, 3)
-    page = request.GET.get('page')
-    page_obj = paginator.get_page(page)
-    return render(request, 'register/user-profile.html', {'links': page_obj})
+
+    try:
+        slug = paginator.page(page)
+    except PageNotAnInteger:
+        slug = paginator.page(1)
+    except EmptyPage:
+        if request.is_ajax():
+            return HttpResponse('')
+    if request.is_ajax():
+        return render(request, 'register/ajax_pag.html', {'slug': slug})
+    return render(request, 'register/pagination.html', {'slug': slug})
 
 
 """ВЫВОДИТ ГОТОВУЮ ССЫЛКУ НА ЭКРАН И В БД"""
@@ -137,7 +145,6 @@ def home_view(request: HttpRequest, link_slug: str) -> HttpResponse:
 
 
 class DelView(DeleteView):
-
     model = LinkModel
-    success_url = reverse_lazy('userprofile')
+    success_url = reverse_lazy(pagination_view)
     template_name = 'register/delete.html'

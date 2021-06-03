@@ -1,0 +1,37 @@
+{% load static %}
+<style>
+li {
+    list-style-type: none;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+    </style>
+
+{% for el in slug %}
+        <div class="pag">
+        <h4 style="margin-top: 50px">{{ el.created_at }}</h4>
+            <ul style="color: white; font-size: 14px;margin-top: 2px;list-style: square outside">
+                <li><b>Short url :http://127.0.0.1:8000/redirect/{{ el.slug }}</b></li>
+                <li><b>{{ el.counter }} times</b></li>
+                <li ><b>Full link :</b><a><i>{{ el.link }}</i></a></li>
+                <a href="{% url 'delete' el.slug %}" class="btn" type="submit">Delete</a>
+            </ul>
+        </div>
+{% endfor %}
+
+    <div>
+             {% if slug.has_previous %}
+                 <a class="btn" id="prev" onclick='history.back(); return false;'
+ >Back</a>
+                 {% endif %}
+
+         {% if slug.has_next %}
+<a id="load" class="btn" data-page='{{ slug.next_page_number }}'>Next</a>
+                {% endif %}
+
+    </div>
