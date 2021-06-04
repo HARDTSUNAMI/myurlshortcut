@@ -1,38 +1,16 @@
-function initialiseForward() {
-    $('#load').click(function (e) {
+function initialise() {
+    $('.paginator').click(function (e) {
         e.preventDefault();
-        let page = parseInt(e.target.getAttribute('data-page'));
-        $.get('?page=' + page, function (data) {
+        let next = parseInt(e.target.getAttribute('data-page'));
+        $.get('?page=' + next, function (data) {
             $('#project_list').html(data)
-                        history.pushState('page', '', '?page=' + page)
-
-                })
+                        history.pushState('next', '', '?page=' + next)
             })
-        }
-        $(document).ready(function (){
-        initialiseForward();
-        })
-        $(document).ajaxComplete(function (){
-        initialiseForward();
-        });
-
-
-
-
-function initialiseBack() {
-    $('#prev').click(function () {
-        window.onpopstate = function () {
-            history.go();
-            };
-        })
-    }
-        $(document).ready(function (){
-        initialiseBack();
+        })}
+$(document).ready(function (){
+    initialise();
     })
 
-        $(document).ajaxComplete(function (){
-        initialiseBack()
-        location.reload();
+$(document).ajaxComplete(function (){
+    initialise()
     })
-
-

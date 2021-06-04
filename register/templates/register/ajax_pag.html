@@ -22,16 +22,15 @@ li {
                 <a href="{% url 'delete' el.slug %}" class="btn" type="submit">Delete</a>
             </ul>
         </div>
+
 {% endfor %}
 
     <div>
              {% if slug.has_previous %}
-                 <a class="btn" id="prev" onclick='history.back(); return false;'
- >Back</a>
+                 <a class="btn paginator" data-page='{{ slug.previous_page_number }}'>Back</a>
                  {% endif %}
-
          {% if slug.has_next %}
-<a id="load" class="btn" data-page='{{ slug.next_page_number }}'>Next</a>
+<a  class="btn paginator" data-page='{{ slug.next_page_number }}'>Next</a>
                 {% endif %}
 
     </div>
