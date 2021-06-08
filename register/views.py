@@ -103,7 +103,7 @@ def mainpage_view(request: HttpRequest) -> HttpResponse:
 
 
 @login_required()
-def pagination_view(request: HttpRequest):
+def pagination_view(request: HttpRequest) -> HttpResponse:
     slug = LinkModel.objects.filter(author=request.user)
     page = request.GET.get('page', 1)
     paginator = Paginator(slug, 3)
