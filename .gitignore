@@ -22,5 +22,6 @@ staticfiles.json
 .vim/
 /env
 .mypy_cache/
+.cache_project/
 .vscode
 /venv/*
