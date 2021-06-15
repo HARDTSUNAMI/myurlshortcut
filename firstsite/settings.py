@@ -26,7 +26,7 @@ SECRET_KEY = '(4_#^zt=abue+xbdndfs_cf5r1^to=ri5goo1=4)07t+lept#+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS: List[str] = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
 
 # Application definition
 
@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'firstsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'shortcut',
+        'USER': 'postgres',
+        'PASSWORD': 'supersecretpassword',
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
