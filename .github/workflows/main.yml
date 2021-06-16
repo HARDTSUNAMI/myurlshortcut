@@ -24,7 +24,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
+      - name: Install python
+      - uses: actions/setup-python@v2
+        with:
+          python-version:3
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run flake8
+        run: flake8 .
+      - name: Run mypy
+        run: mypy .
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
