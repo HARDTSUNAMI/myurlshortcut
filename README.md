@@ -13,10 +13,12 @@ git clone https://github.com/Yurasblv/myurlshortcut.git
    ```
 2. Run bash commands
 Go to projects folder
-```bash cd activity
+```bash 
+cd activity
 ```
 Run develop mode
-```bash make
+```bash 
+make
 ```
 Apply migrations
 ```
@@ -32,7 +34,9 @@ Email address: admin@admin.admin
 Password: adminadmin
 ```
 Open started project on browser
-```bash open http://localhost:8000/
+``` 
+    bash 
+    open http://localhost:8000/
 ```
 If you want connect to local database use these credentials:
 ```
