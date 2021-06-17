@@ -104,14 +104,14 @@ def mainpage_view(request: HttpRequest) -> HttpResponse:
 
 @login_required()
 def pagination_view(request: HttpRequest) -> HttpResponse:
-    slug = LinkModel.objects.filter(author=request.user)
+    slug = LinkModel.objects.filter(author=request.user) # type: ignore
     page = request.GET.get('page', 1)
     paginator = Paginator(slug, 3)
 
     try:
-        slug = paginator.page(page)
+        slug = paginator.page(page)  # type: ignore
     except PageNotAnInteger:
-        slug = paginator.page(1)
+        slug = paginator.page(1)  # type: ignore
     except EmptyPage:
         if request.is_ajax():
             return HttpResponse('')
