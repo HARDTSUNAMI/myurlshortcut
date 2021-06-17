@@ -7,42 +7,27 @@ Here i used custom tips of style coding .
 
 U can easily test that application on your PC ,there are steps for install in your dev tool.
 
-1. Clone repo 
+Install docker-compose firstly
+```
+sudo apt update
+sudo apt upgrade
+sudo apt install curl
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+Clone repository:
 ``` bash
 git clone https://github.com/Yurasblv/myurlshortcut.git
    ```
-2. Run bash commands
-Go to projects folder
-``` bash 
-cd activity
-```
-Run develop mode
-``` bash 
-make
-```
-Apply migrations
-```
-make migrate
-```
-Create superuser
-```bash make bash
+Install docker and docker-compose on ubuntu steps:
 
-python manage.py createsuperuser
+Launch the app:
+```
+docker-compose up
 
-Username: admin
-Email address: admin@admin.admin
-Password: adminadmin
+###for turn down container : ctrl+c(force do it twice) and then use docker-compose down
 ```
-Open started project on browser
-``` 
-    bash 
-    open http://localhost:8000/
-```
-If you want connect to local database use these credentials:
-```
-Host: localhost
-Port: 5432
-User: postgres
-Password: supersecretpassword
-```
+
+
 
