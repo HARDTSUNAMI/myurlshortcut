@@ -8,5 +8,6 @@ Here i used custom tips of style coding .
 U can easily test that application on your PC ,there are steps for install in your dev tool.
 
 1. Clone repo 
-'''bash
-   https://github.com/Yurasblv/myurlshortcut.git'''
+```   bash
+   https://github.com/Yurasblv/myurlshortcut.git```
+
