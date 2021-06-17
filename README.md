@@ -8,6 +8,37 @@ Here i used custom tips of style coding .
 U can easily test that application on your PC ,there are steps for install in your dev tool.
 
 1. Clone repo 
-```   bash
-   https://github.com/Yurasblv/myurlshortcut.git```
+``` bash
+git clone https://github.com/Yurasblv/myurlshortcut.git
+   ```
+2. Run bash commands
+Go to projects folder
+```bash cd activity
+```
+Run develop mode
+```bash make
+```
+Apply migrations
+```
+make migrate
+```
+Create superuser
+```bash make bash
+
+python manage.py createsuperuser
+
+Username: admin
+Email address: admin@admin.admin
+Password: adminadmin
+```
+Open started project on browser
+```bash open http://localhost:8000/
+```
+If you want connect to local database use these credentials:
+```
+Host: localhost
+Port: 5432
+User: postgres
+Password: supersecretpassword
+```
 
