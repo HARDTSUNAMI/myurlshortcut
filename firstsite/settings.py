@@ -26,6 +26,7 @@ SECRET_KEY = '(4_#^zt=abue+xbdndfs_cf5r1^to=ri5goo1=4)07t+lept#+'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
 # Application definition
 
 INSTALLED_APPS = [
