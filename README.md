@@ -13,11 +13,11 @@ git clone https://github.com/Yurasblv/myurlshortcut.git
    ```
 2. Run bash commands
 Go to projects folder
-```bash 
+``` bash 
 cd activity
 ```
 Run develop mode
-```bash 
+``` bash 
 make
 ```
 Apply migrations
