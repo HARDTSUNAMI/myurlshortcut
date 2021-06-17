@@ -20,7 +20,6 @@ Clone repository:
 ``` bash
 git clone https://github.com/Yurasblv/myurlshortcut.git
    ```
-Install docker and docker-compose on ubuntu steps:
 
 Launch the app:
 ```
