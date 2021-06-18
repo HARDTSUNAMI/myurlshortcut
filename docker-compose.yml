@@ -1,5 +1,6 @@
   version: '3.8'
 
+
   services:
     shortcut:
         container_name: shortcut
@@ -27,6 +28,7 @@
             - 5433:5432
   volumes:
        postgresql-data:
+
 
 
 
