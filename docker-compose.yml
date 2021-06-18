@@ -24,10 +24,10 @@
            - POSTGRES_DB=shortcut
            - POSTGRES_USER=postgres
            - POSTGRES_PASSWORD=supersecretpassword
+           - POSTGRES_HOST_AUTH_METHOD=trust
         ports:
             - 5433:5432
-  volumes:
-       postgresql-data:
+
 
 
 
