@@ -9,13 +9,14 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-import os, django_heroku
+import os
 from pathlib import Path
 
 
 # Configure Django App for Heroku.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import django_on_heroku
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -127,4 +128,4 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '/media')
 
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
