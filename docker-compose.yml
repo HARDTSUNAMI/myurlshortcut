@@ -12,21 +12,22 @@
         env_file:
         - .env.dev
         depends_on:
-        - db
+        - database
         command:
             sh -c 'wait-for-it.sh db:5432 && python manage.py runserver 0.0.0.0:8000'
 
-    db:
+    database:
         image: postgres:13
         volumes:
             - postgresql-data:/var/lib/postgresql/data
         environment:
+           - POSTGRES_HOST_AUTH_METHOD=trust
            - POSTGRES_DB=shortcut
            - POSTGRES_USER=postgres
            - POSTGRES_PASSWORD=supersecretpassword
         ports:
             - 5433:5432
-volumes:
+  volumes:
         postgresql-data:
 
 

@@ -16,7 +16,6 @@ from pathlib import Path
 # Configure Django App for Heroku.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-import django_on_heroku
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -82,7 +81,7 @@ DATABASES = {
         'NAME': 'shortcut',
         'USER': 'postgres',
         'PASSWORD': 'supersecretpassword',
-        'HOST': 'db',
+        'HOST': os.getenv('DB_HOST','localhost'),
         'PORT': '5432',
     }
 }
@@ -128,4 +127,4 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '/media')
 
-django_on_heroku.settings(locals())
+
