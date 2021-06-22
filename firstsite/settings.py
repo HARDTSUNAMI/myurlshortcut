@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'firstsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'shortcut',
         'USER': 'postgres',
         'PASSWORD': 'supersecretpassword',
-        'HOST': os.getenv('DB_HOST','localhost'),
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -126,5 +126,3 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '/media')
-
-
