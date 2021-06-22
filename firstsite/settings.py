@@ -28,7 +28,7 @@ SECRET_KEY = '(4_#^zt=abue+xbdndfs_cf5r1^to=ri5goo1=4)07t+lept#+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'shortcut',
         'USER': 'postgres',
         'PASSWORD': 'supersecretpassword',
-        'HOST': 'db',
+        'HOST': 'database',
         'PORT': '5432',
     }
 }
