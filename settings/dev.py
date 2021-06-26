@@ -1,5 +1,4 @@
-from firstsite.settings.base import *
-import dj_database_url
+from settings.base import *
 
 DEBUG = True
 ALLOWED_HOSTS = ['*']
