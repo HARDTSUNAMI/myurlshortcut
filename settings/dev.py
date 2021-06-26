@@ -1,14 +1,11 @@
 from settings.base import *
+import django_heroku
+import dj_database_url
+
+
+django_heroku.settings(locals())
 
 DEBUG = False
 ALLOWED_HOSTS = ['*']
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'shortcut',
-        'USER': 'postgres',
-        'PASSWORD': 'secretsecretpassword',
-        'HOST': 'database',
-        'PORT': '5432',
-    }
-}
+
+DATABASES['default'] = dj_database_url.config()
