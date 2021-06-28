@@ -1,6 +1,9 @@
 import os
 from pathlib import Path
 
+# Tries to import local settings, if on dev,
+# import everything in local_Settings, which overrides the dj_database_url
+# If on deploy, local_settings won't be found so just ignore the ImportError
 
 # Configure Django App for Heroku.
 
@@ -66,16 +69,7 @@ WSGI_APPLICATION = 'firstsite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'shortcut',
-        'USER': 'postgres',
-        'PASSWORD': 'secretsecretpassword',
-        'HOST': 'database',
-        'PORT': '5432',
-    }
-}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -115,7 +109,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'register/static')
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '/media')
+
+# Tries to import local settings, if on dev,
+# import everything in local_Settings, which overrides the dj_database_url
+# If on deploy, local_settings won't be found so just ignore the ImportError
+try:
+    from .develop import *
+except ImportError:
+    pass
