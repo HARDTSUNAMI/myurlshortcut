@@ -13,6 +13,8 @@ services:
         - .env.dev
         depends_on:
         - database
+        links:
+        - database:databse
         command:
             sh -c 'wait-for-it.sh database:5432 && python manage.py runserver 0.0.0.0:8000'
 

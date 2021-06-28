@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
-
+import dj_database_url
+import django_heroku
 # Tries to import local settings, if on dev,
 # import everything in local_Settings, which overrides the dj_database_url
 # If on deploy, local_settings won't be found so just ignore the ImportError
@@ -20,7 +21,7 @@ SECRET_KEY = '(4_#^zt=abue+xbdndfs_cf5r1^to=ri5goo1=4)07t+lept#+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -69,8 +70,23 @@ WSGI_APPLICATION = 'firstsite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+# DATABASES = {
+#     'default': dj_database_url.config()
+# }
+django_heroku.settings(locals())
 
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'shortcut',
+        'USER': 'admin',
+        'PASSWORD': 'secret',
+        'HOST': 'database',
+        'PORT': '5432',
+    }
+}
+db = dj_database_url.config()
+DATABASES['default'].update(db)
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -112,11 +128,12 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '/media')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Tries to import local settings, if on dev,
 # import everything in local_Settings, which overrides the dj_database_url
 # If on deploy, local_settings won't be found so just ignore the ImportError
-try:
-    from .develop import *
-except ImportError:
-    pass
+# try:
+#     from .develop import *
+# except ImportError:
+#     pass
