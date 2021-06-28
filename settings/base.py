@@ -73,7 +73,6 @@ WSGI_APPLICATION = 'firstsite.wsgi.application'
 # DATABASES = {
 #     'default': dj_database_url.config()
 # }
-django_heroku.settings(locals())
 
 DATABASES = {
     'default': {
@@ -85,8 +84,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-db = dj_database_url.config()
-DATABASES['default'].update(db)
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -133,7 +131,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Tries to import local settings, if on dev,
 # import everything in local_Settings, which overrides the dj_database_url
 # If on deploy, local_settings won't be found so just ignore the ImportError
-# try:
-#     from .develop import *
-# except ImportError:
-#     pass
+try:
+    from .prod import *
+except ImportError:
+    pass
