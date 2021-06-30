@@ -3,7 +3,7 @@ import dj_database_url
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['cutyourlink.herokuapp.com', '*']
 
 DATABASES['default']: dj_database_url.config(default=os.getenv('DATABASE_URL'), conn_max_age=600)
 
