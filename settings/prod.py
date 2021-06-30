@@ -10,6 +10,6 @@ DATABASES['default']: dj_database_url.config(default=os.getenv('DATABASE_URL'), 
 django_heroku.settings(locals())
 
 try:
-    from .dev import *
+    from .base import *
 except ImportError:
     pass
