@@ -4,7 +4,7 @@
 
 
             <p class="nwlinktext" style="margin-top: 20%" >Your link is : {{ lastslug.slug }}<p></p>
-    <form method="get" action="{% url 'golink' lastslug.slug %}"  class="nwlinktext" style="margin-top: 0">
+    <form method="get" action="{% url 'goLink' lastslug.slug %}"  class="nwlinktext" style="margin-top: 0">
                 {% csrf_token %}
                 <button class="btn" >Go to!</button>
 
