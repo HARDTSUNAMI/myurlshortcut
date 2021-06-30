@@ -12,15 +12,17 @@ services:
         env_file:
         - .env.dev
         depends_on:
-        - database
-        links:
-        - database:databse
+        - db
         environment:
+        - DB_HOST=db
+        - DB_NAME=shortcut
+        - DB_USER=admin
+        - DB_PASSWORD=secret
         - DJANGO_SETTINGS_MODULE=settings.dev
         command:
-            sh -c 'wait-for-it.sh database:5432 && python manage.py runserver 0.0.0.0:8000'
+            sh -c 'wait-for-it.sh db:5432 && python manage.py runserver 0.0.0.0:8000'
 
-    database:
+    db:
         image: postgres
         restart: always
         volumes:
@@ -29,8 +31,7 @@ services:
            - POSTGRES_DB=shortcut
            - POSTGRES_USER=admin
            - POSTGRES_PASSWORD=secret
-        ports:
-            - 5433:5432
+
 volumes:
         postgresql-data:
 
