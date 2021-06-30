@@ -19,9 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '(4_#^zt=abue+xbdndfs_cf5r1^to=ri5goo1=4)07t+lept#+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
@@ -74,16 +73,7 @@ WSGI_APPLICATION = 'firstsite.wsgi.application'
 #     'default': dj_database_url.config()
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'shortcut',
-        'USER': 'admin',
-        'PASSWORD': 'secret',
-        'HOST': 'database',
-        'PORT': '5432',
-    }
-}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
