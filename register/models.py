@@ -1,7 +1,6 @@
 import random
 import string
 from typing import Any
-
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -24,6 +23,9 @@ class LinkModel(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
+
+    def get_absolute_url(self):
+        return reverse('', kwargs={'name': self.slug})
 
     def __str__(self) -> str:
         return '{} {}'.format(self.slug, self.counter)

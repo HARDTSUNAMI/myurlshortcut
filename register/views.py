@@ -58,7 +58,6 @@ def auth_view(request: HttpRequest) -> HttpResponse:
 """ДЛЯ НЕЗАРЕГ ПОЛЬЗОВ"""
 
 
-@csrf_protect
 def profile_view(request: HttpRequest) -> HttpResponse:
     form = LinkForm()
     data = {
@@ -80,7 +79,7 @@ def profile_view(request: HttpRequest) -> HttpResponse:
 """ДЛЯ ЗАРЕГ ПОЛЬЗОВ"""
 
 
-@login_required(login_url='auth/')
+@login_required()
 def mainpage_view(request: HttpRequest) -> HttpResponse:
     form = LinkForm()
     data = {
@@ -102,7 +101,6 @@ def mainpage_view(request: HttpRequest) -> HttpResponse:
 """ПЕРЕЧЕНЬ СГЕНЕРИРОВАННЫХ ССЫЛОК ДЛЯ ПОЛЬЗОВАТЕЛЯ"""
 
 
-@login_required()
 def pagination_view(request: HttpRequest) -> HttpResponse:
     slug = LinkModel.objects.filter(author=request.user)  # type: ignore
     page = request.GET.get('page', 1)
