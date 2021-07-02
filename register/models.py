@@ -1,9 +1,9 @@
 import random
 import string
 from typing import Any
-
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 
 def link_generator(
@@ -24,6 +24,9 @@ class LinkModel(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
+
+    def get_absolute_url(self):
+        return reverse('', kwargs={'link_slug': self.link})
 
     def __str__(self) -> str:
         return '{} {}'.format(self.slug, self.counter)

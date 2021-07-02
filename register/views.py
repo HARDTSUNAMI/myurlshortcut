@@ -5,11 +5,11 @@ from django.db.models import F
 from django.http import HttpRequest
 from django.shortcuts import HttpResponse, redirect, render
 from django.urls import reverse_lazy
-from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DeleteView
 from .forms import LoginForm, LinkForm
 from .models import LinkModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.utils.decorators import method_decorator
 
 """РЕГИСТРАЦИЯ"""
 
@@ -58,7 +58,6 @@ def auth_view(request: HttpRequest) -> HttpResponse:
 """ДЛЯ НЕЗАРЕГ ПОЛЬЗОВ"""
 
 
-@csrf_protect
 def profile_view(request: HttpRequest) -> HttpResponse:
     form = LinkForm()
     data = {
@@ -80,7 +79,7 @@ def profile_view(request: HttpRequest) -> HttpResponse:
 """ДЛЯ ЗАРЕГ ПОЛЬЗОВ"""
 
 
-@login_required(login_url='auth/')
+@login_required()
 def mainpage_view(request: HttpRequest) -> HttpResponse:
     form = LinkForm()
     data = {
@@ -104,7 +103,7 @@ def mainpage_view(request: HttpRequest) -> HttpResponse:
 
 @login_required()
 def pagination_view(request: HttpRequest) -> HttpResponse:
-    slug = LinkModel.objects.filter(author=request.user)  # type: ignore
+    slug = LinkModel.objects.filter(author=request.user).order_by('author_id')  # type: ignore
     page = request.GET.get('page', 1)
     paginator = Paginator(slug, 3)
 
@@ -131,19 +130,19 @@ def newgetlink_view(request: HttpRequest) -> HttpResponse:
 """ ПЕРЕВОД НА ИЗНАЧАЛЬНУЮ СТРАНИЦУ ПО НОВОЙ ССЫЛКЕ"""
 
 
-@login_required(login_url='auth/')
 def home_view(request: HttpRequest, link_slug: str) -> HttpResponse:
-    home = LinkModel.objects.filter(slug=link_slug)[0]
+    url = LinkModel.objects.filter(slug=link_slug).first()
     if request.method == 'GET':
-        LinkModel.objects.filter(slug=link_slug).update(counter=F('counter') + 1)
-        return redirect(home.link)
-    else:
-        raise AssertionError
+        if request.user.is_authenticated:
+            LinkModel.objects.filter(slug=link_slug).update(counter=F('counter') + 1)
+        return redirect(url.link)
+    return redirect(url.link)
 
 
 """УДАЛЕНИЕ ЗАПИСИ"""
 
 
+@method_decorator(login_required, name='dispatch')
 class DelView(DeleteView):
     model = LinkModel
     success_url = reverse_lazy(pagination_view)
