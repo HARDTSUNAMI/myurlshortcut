@@ -129,7 +129,7 @@ def newgetlink_view(request: HttpRequest) -> HttpResponse:
 """ ПЕРЕВОД НА ИЗНАЧАЛЬНУЮ СТРАНИЦУ ПО НОВОЙ ССЫЛКЕ"""
 
 
-@login_required(login_url='auth/')
+@login_required()
 def home_view(request: HttpRequest, link_slug: str) -> HttpResponse:
     home = LinkModel.objects.filter(slug=link_slug)[0]
     if request.method == 'GET':
