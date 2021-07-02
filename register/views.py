@@ -5,7 +5,6 @@ from django.db.models import F
 from django.http import HttpRequest
 from django.shortcuts import HttpResponse, redirect, render
 from django.urls import reverse_lazy
-from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DeleteView
 from .forms import LoginForm, LinkForm
 from .models import LinkModel
