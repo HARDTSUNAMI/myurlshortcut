@@ -16,7 +16,7 @@ li {
         <div class="pag">
         <h4 style="margin-top: 50px">{{ el.created_at }}</h4>
             <ul style="color: white; font-size: 14px;margin-top: 2px;list-style: square outside">
-                <li><b>Short url :http://127.0.0.1:8000/redirect/{{ el.slug }}</b></li>
+                <li><b>Short url :{{ el.slug }}</b></li>
                 <li><b>{{ el.counter }} times</b></li>
                 <li ><b>Full link :</b><a><i>{{ el.link }}</i></a></li>
                 <a href="{% url 'delete' el.slug %}" class="btn" type="submit">Delete</a>

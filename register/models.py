@@ -25,7 +25,7 @@ class LinkModel(models.Model):
     )
 
     def get_absolute_url(self):
-        return reverse('', kwargs={'name': self.slug})
+        return reverse('', kwargs={'link_slug': self.link})
 
     def __str__(self) -> str:
         return '{} {}'.format(self.slug, self.counter)

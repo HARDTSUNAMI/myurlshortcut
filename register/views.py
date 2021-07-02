@@ -131,14 +131,13 @@ def newgetlink_view(request: HttpRequest) -> HttpResponse:
 """ ПЕРЕВОД НА ИЗНАЧАЛЬНУЮ СТРАНИЦУ ПО НОВОЙ ССЫЛКЕ"""
 
 
-@login_required()
 def home_view(request: HttpRequest, link_slug: str) -> HttpResponse:
-    home = LinkModel.objects.filter(slug=link_slug).first()
+    url = LinkModel.objects.filter(slug=link_slug).first()
     if request.method == 'GET':
-        LinkModel.objects.filter(slug=link_slug).update(counter=F('counter') + 1)
-        return redirect(home.link)
-    else:
-        raise AssertionError
+        if request.user.is_authenticated:
+            LinkModel.objects.filter(slug=link_slug).update(counter=F('counter') + 1)
+        return redirect(url.link)
+    return redirect(url.link)
 
 
 """УДАЛЕНИЕ ЗАПИСИ"""
