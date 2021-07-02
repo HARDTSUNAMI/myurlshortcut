@@ -10,6 +10,7 @@ from django.views.generic import DeleteView
 from .forms import LoginForm, LinkForm
 from .models import LinkModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.utils.decorators import method_decorator
 
 """РЕГИСТРАЦИЯ"""
 
@@ -101,8 +102,9 @@ def mainpage_view(request: HttpRequest) -> HttpResponse:
 """ПЕРЕЧЕНЬ СГЕНЕРИРОВАННЫХ ССЫЛОК ДЛЯ ПОЛЬЗОВАТЕЛЯ"""
 
 
+@login_required()
 def pagination_view(request: HttpRequest) -> HttpResponse:
-    slug = LinkModel.objects.filter(author=request.user)  # type: ignore
+    slug = LinkModel.objects.filter(author=request.user).order_by('author_id')  # type: ignore
     page = request.GET.get('page', 1)
     paginator = Paginator(slug, 3)
 
@@ -131,7 +133,7 @@ def newgetlink_view(request: HttpRequest) -> HttpResponse:
 
 @login_required()
 def home_view(request: HttpRequest, link_slug: str) -> HttpResponse:
-    home = LinkModel.objects.filter(slug=link_slug)[0]
+    home = LinkModel.objects.filter(slug=link_slug).first()
     if request.method == 'GET':
         LinkModel.objects.filter(slug=link_slug).update(counter=F('counter') + 1)
         return redirect(home.link)
@@ -142,6 +144,7 @@ def home_view(request: HttpRequest, link_slug: str) -> HttpResponse:
 """УДАЛЕНИЕ ЗАПИСИ"""
 
 
+@method_decorator(login_required, name='dispatch')
 class DelView(DeleteView):
     model = LinkModel
     success_url = reverse_lazy(pagination_view)
